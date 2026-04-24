@@ -50,11 +50,6 @@ function isGradient(
   return Array.isArray(c);
 }
 
-/** Return primary (display) colour — first colour of a gradient, or the plain colour */
-function primaryColor(c: ColorProp): string {
-  return isGradient(c) ? c[0] : c;
-}
-
 /* ---- Colour interpolation helpers ---- */
 
 /** Parse a hex colour to [r, g, b] (0-255) */
@@ -191,11 +186,6 @@ export function RingChart({
             const totalPct = r.pct;
             const animatedTotal = animated ? totalPct : 0;
 
-            /* ----- Track (muted full circle) ----- */
-            const trackColor = r.hasGrad
-              ? interpolateColors(r.colors, 0.5)
-              : r.colors[0];
-
             /* Arc segments: split the visible arc into many small pieces */
             const totalAngle = animatedTotal * 2 * Math.PI;
             const segCount = Math.max(1, Math.round(SEGMENTS * animatedTotal));
@@ -297,7 +287,6 @@ export function RingChart({
           </span>
         </div>
       </div>
-
     </div>
   );
 }
