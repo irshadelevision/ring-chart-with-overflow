@@ -28,7 +28,7 @@ const ageBreakdown: DonutDatum[] = [
 const affinityIndex: AffinityBarDatum[] = [
   {
     label: "BEAUTY & FASHIONISTA",
-    value: 0.33,
+    value: 1.33,
     colors: ["#90E9F2", "#2E89D8", "#111EA5"],
   },
   {
@@ -81,7 +81,7 @@ const affinityIndex: AffinityBarDatum[] = [
 export default function Home() {
   return (
     <main className="min-h-screen bg-white px-6 py-12 sm:px-10 lg:px-16">
-      <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-16">
+      <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-16">
         <RingChart data={healthRings} size={260} ringWidth={44} gap={7} />
 
         <DonutChart
