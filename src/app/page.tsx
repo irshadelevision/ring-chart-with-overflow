@@ -3,7 +3,13 @@ import {
   type AffinityBarDatum,
 } from "@/components/affinity-bar-chart";
 import { DonutChart, type DonutDatum } from "@/components/donut-chart";
+import { GenderSplitChart } from "@/components/gender-split-chart";
 import { RingChart, type RingDatum } from "@/components/ring-chart";
+import { TotalScreens } from "@/components/total-screens";
+import {
+  UniqueReachChart,
+  type UniqueReachDatum,
+} from "@/components/unique-reach-chart";
 
 const progressValue = 120;
 
@@ -78,6 +84,34 @@ const affinityIndex: AffinityBarDatum[] = [
   },
 ];
 
+const totalScreens = 1579;
+const uniqueReach = 151100;
+const genderSplit = {
+  leftPercentage: 59,
+  rightPercentage: 41,
+};
+
+const uniqueReachByArea: UniqueReachDatum[] = [
+  { label: "Abu Dhabi Comm", value: 1_680_000 },
+  { label: "Abu Dhabi Res", value: 2_950_000 },
+  { label: "Business Bay Comm", value: 3_940_000 },
+  { label: "Business Bay Res", value: 2_740_000 },
+  { label: "DIFC Freezone", value: 1_880_000 },
+  { label: "Downtown", value: 2_390_000 },
+  { label: "Dubai Creek", value: 1_320_000 },
+  { label: "Dubai Hills", value: 1_070_000 },
+  { label: "Dubai Marina", value: 4_060_000 },
+  { label: "Dubai Silicon Oasis", value: 1_890_000 },
+  { label: "Expo South", value: 1_490_000 },
+  { label: "JBR", value: 3_100_000 },
+  { label: "JLT Comm", value: 2_040_000 },
+  { label: "JLT Res", value: 1_590_000 },
+  { label: "JVC", value: 2_570_000 },
+  { label: "The Greens And Views", value: 2_790_000 },
+  { label: "The Palm", value: 1_990_000 },
+  { label: "One Central", value: 1_930_000 },
+];
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-white px-6 py-12 sm:px-10 lg:px-16">
@@ -93,6 +127,15 @@ export default function Home() {
         />
 
         <AffinityBarChart data={affinityIndex} />
+
+        <TotalScreens value={totalScreens} />
+
+        <UniqueReachChart value={uniqueReach} data={uniqueReachByArea} />
+
+        <GenderSplitChart
+          leftPercentage={genderSplit.leftPercentage}
+          rightPercentage={genderSplit.rightPercentage}
+        />
       </div>
     </main>
   );
