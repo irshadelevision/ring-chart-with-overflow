@@ -1,5 +1,69 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Urbane";
+  src: url("/Urbane%20Family/Urbane-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Urbane";
+  src: url("/Urbane%20Family/Urbane-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Urbane";
+  src: url("/Urbane%20Family/Urbane-DemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Urbane";
+  src: url("/Urbane%20Family/Urbane-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Urbane";
+  src: url("/Urbane%20Family/Urbane-Heavy.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Urbane";
+  src: url("/Urbane%20Family/Urbane-MediumItalic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Urbane";
+  src: url("/Urbane%20Family/Urbane-BoldItalic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Urbane";
+  src: url("/Urbane%20Family/Urbane-HeavyItalic.otf") format("opentype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -23,4 +87,56 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.font-urbane {
+  font-family: "Urbane", Arial, Helvetica, sans-serif;
+}
+
+.report-print-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2.75rem;
+}
+
+.report-sheet {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  min-height: 760px;
+  border-radius: 30px;
+  background: #ffffff;
+  padding: 0.35rem;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+}
+
+@media print {
+  body {
+    background: #ffffff;
+    color: #171717;
+  }
+
+  .report-print-stack {
+    gap: 0;
+    padding: 0 !important;
+  }
+
+  .report-sheet {
+    width: 100%;
+    max-width: none;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  .report-sheet-break {
+    break-after: page;
+    page-break-after: always;
+  }
 }

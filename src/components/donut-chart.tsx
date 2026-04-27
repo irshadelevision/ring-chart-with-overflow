@@ -31,6 +31,12 @@ export interface DonutChartProps {
   cutout?: number | string;
   segmentSpacing?: number;
   rotation?: number;
+  labelPaddingX?: number;
+  labelPaddingY?: number;
+  percentColor?: string;
+  labelColor?: string;
+  percentFontWeight?: number;
+  labelFontWeight?: number;
   className?: string;
 }
 
@@ -44,6 +50,12 @@ export function DonutChart({
   cutout = "64%",
   segmentSpacing = 5,
   rotation = 16,
+  labelPaddingX,
+  labelPaddingY,
+  percentColor = PERCENT_COLOR,
+  labelColor = LABEL_COLOR,
+  percentFontWeight = 700,
+  labelFontWeight = 500,
   className,
 }: DonutChartProps) {
   const safeValues = useMemo(
@@ -55,8 +67,10 @@ export function DonutChart({
     [safeValues],
   );
 
-  const labelPadding = Math.round(size * 0.39);
-  const canvasSize = size + labelPadding * 2;
+  const resolvedLabelPaddingX = labelPaddingX ?? Math.round(size * 0.39);
+  const resolvedLabelPaddingY = labelPaddingY ?? resolvedLabelPaddingX;
+  const canvasWidth = size + resolvedLabelPaddingX * 2;
+  const canvasHeight = size + resolvedLabelPaddingY * 2;
 
   const chartData = useMemo(
     () => ({
@@ -91,17 +105,19 @@ export function DonutChart({
 
         const fontFamily =
           (typeof window !== "undefined"
-            ? window.getComputedStyle(document.body).fontFamily
+            ? window.getComputedStyle(chart.canvas).fontFamily
             : FALLBACK_FONT) || FALLBACK_FONT;
-        const scale = chart.width / canvasSize;
+        const widthScale = chart.width / canvasWidth;
+        const heightScale = chart.height / canvasHeight;
+        const scale = Math.min(widthScale, heightScale);
         const radialStart = Math.max(8 * scale, 6);
-        const diagonalRun = Math.max(48 * scale, 34);
-        const diagonalRise = Math.max(48 * scale, 34);
-        const horizontalReach = Math.max(108 * scale, 78);
+        const diagonalRun = Math.max(42 * widthScale, 30);
+        const diagonalRise = Math.max(34 * heightScale, 24);
+        const horizontalReach = Math.max(92 * widthScale, 64);
         const lineWidth = Math.max(1.6 * scale, 1.1);
         const dotRadius = Math.max(3 * scale, 2.1);
-        const percentFontSize = Math.max(32 * scale, 22);
-        const labelFontSize = Math.max(15 * scale, 11);
+        const percentFontSize = Math.max(29 * scale, 19);
+        const labelFontSize = Math.max(14 * scale, 10);
         const percentBottomOffset = Math.max(14 * scale, 10);
         const labelTopOffset = Math.max(10 * scale, 7);
         const textInset = Math.max(1 * scale, 0.5);
@@ -154,13 +170,13 @@ export function DonutChart({
           ctx.fill();
 
           ctx.textAlign = isRightSide ? "right" : "left";
-          ctx.fillStyle = PERCENT_COLOR;
-          ctx.font = `700 ${percentFontSize}px ${fontFamily}`;
+          ctx.fillStyle = percentColor;
+          ctx.font = `${percentFontWeight} ${percentFontSize}px ${fontFamily}`;
           ctx.textBaseline = "bottom";
           ctx.fillText(percentage, textX, endY - percentBottomOffset);
 
-          ctx.fillStyle = LABEL_COLOR;
-          ctx.font = `500 ${labelFontSize}px ${fontFamily}`;
+          ctx.fillStyle = labelColor;
+          ctx.font = `${labelFontWeight} ${labelFontSize}px ${fontFamily}`;
           ctx.textBaseline = "top";
           ctx.fillText(datum.label, textX, endY + labelTopOffset);
         });
@@ -168,7 +184,17 @@ export function DonutChart({
         ctx.restore();
       },
     }),
-    [canvasSize, data, safeValues, total],
+    [
+      canvasHeight,
+      canvasWidth,
+      data,
+      labelColor,
+      labelFontWeight,
+      percentColor,
+      percentFontWeight,
+      safeValues,
+      total,
+    ],
   );
 
   const options = useMemo<ChartOptions<"doughnut">>(
@@ -186,10 +212,10 @@ export function DonutChart({
       },
       layout: {
         padding: {
-          top: labelPadding,
-          right: labelPadding,
-          bottom: labelPadding,
-          left: labelPadding,
+          top: resolvedLabelPaddingY,
+          right: resolvedLabelPaddingX,
+          bottom: resolvedLabelPaddingY,
+          left: resolvedLabelPaddingX,
         },
       },
       plugins: {
@@ -207,7 +233,7 @@ export function DonutChart({
         },
       },
     }),
-    [cutout, labelPadding, rotation],
+    [cutout, resolvedLabelPaddingX, resolvedLabelPaddingY, rotation],
   );
 
   if (!data.length) {
@@ -217,9 +243,12 @@ export function DonutChart({
   return (
     <div
       className={`mx-auto w-full ${className ?? ""}`}
-      style={{ maxWidth: canvasSize }}
+      style={{ maxWidth: canvasWidth }}
     >
-      <div className="relative aspect-square w-full">
+      <div
+        className="relative w-full"
+        style={{ aspectRatio: `${canvasWidth} / ${canvasHeight}` }}
+      >
         <Doughnut
           data={chartData}
           options={options}

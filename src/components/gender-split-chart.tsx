@@ -6,6 +6,7 @@ export interface GenderSplitChartProps {
 
 const LABEL_COLOR = "#0B277F";
 const CONNECTOR_COLOR = "#B7B7B7";
+const LABEL_FONT_SIZE = 61.6;
 
 function formatPercentage(value: number): string {
   return `${Math.round(value)}%`;
@@ -29,9 +30,9 @@ export function GenderSplitChart({
             x="74"
             y="98"
             fill={LABEL_COLOR}
-            fontFamily='"Arial Black", "Helvetica Neue", Arial, sans-serif'
-            fontSize="56"
-            fontWeight="900"
+            fontFamily='"Urbane", "Arial Black", "Helvetica Neue", Arial, sans-serif'
+            fontSize={LABEL_FONT_SIZE}
+            fontWeight="600"
           >
             {formatPercentage(leftPercentage)}
           </text>
@@ -40,9 +41,9 @@ export function GenderSplitChart({
             x="1126"
             y="98"
             fill={LABEL_COLOR}
-            fontFamily='"Arial Black", "Helvetica Neue", Arial, sans-serif'
-            fontSize="56"
-            fontWeight="900"
+            fontFamily='"Urbane", "Arial Black", "Helvetica Neue", Arial, sans-serif'
+            fontSize={LABEL_FONT_SIZE}
+            fontWeight="600"
             textAnchor="end"
           >
             {formatPercentage(rightPercentage)}

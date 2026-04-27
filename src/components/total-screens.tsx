@@ -1,18 +1,26 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 
 export interface TotalScreensProps {
   value: number | string;
   title?: string;
   className?: string;
+  titleClassName?: string;
+  titleStyle?: CSSProperties;
+  valueClassName?: string;
+  valueStyle?: CSSProperties;
+  containerClassName?: string;
+  maxFontSize?: number;
+  minFontSize?: number;
+  horizontalPadding?: number;
 }
 
 const TEXT_GRADIENT =
   "linear-gradient(180deg, #1E439E 12%, #265FC1 52%, #76D8EC 100%)";
-const MAX_FONT_SIZE = 430;
-const MIN_FONT_SIZE = 112;
-const HORIZONTAL_PADDING = 24;
+const DEFAULT_MAX_FONT_SIZE = 430;
+const DEFAULT_MIN_FONT_SIZE = 112;
+const DEFAULT_HORIZONTAL_PADDING = 24;
 
 function formatValue(value: number | string): string {
   if (typeof value === "number") {
@@ -26,11 +34,19 @@ export function TotalScreens({
   value,
   title = "TOTAL SCREENS",
   className,
+  titleClassName,
+  titleStyle,
+  valueClassName,
+  valueStyle,
+  containerClassName,
+  maxFontSize = DEFAULT_MAX_FONT_SIZE,
+  minFontSize = DEFAULT_MIN_FONT_SIZE,
+  horizontalPadding = DEFAULT_HORIZONTAL_PADDING,
 }: TotalScreensProps) {
   const formattedValue = formatValue(value);
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
-  const [fontSize, setFontSize] = useState(MAX_FONT_SIZE);
+  const [fontSize, setFontSize] = useState(maxFontSize);
 
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -44,13 +60,13 @@ export function TotalScreens({
 
     const fitText = () => {
       const availableWidth = Math.max(
-        container.clientWidth - HORIZONTAL_PADDING,
-        MIN_FONT_SIZE,
+        container.clientWidth - horizontalPadding,
+        minFontSize,
       );
 
-      let low = MIN_FONT_SIZE;
-      let high = MAX_FONT_SIZE;
-      let best = MIN_FONT_SIZE;
+      let low = minFontSize;
+      let high = maxFontSize;
+      let best = minFontSize;
 
       while (low <= high) {
         const mid = Math.floor((low + high) / 2);
@@ -83,26 +99,30 @@ export function TotalScreens({
       cancelAnimationFrame(frameId);
       resizeObserver.disconnect();
     };
-  }, [formattedValue]);
+  }, [formattedValue, horizontalPadding, maxFontSize, minFontSize]);
 
   return (
     <section className={`w-full ${className ?? ""}`}>
-      <h2 className="text-center text-4xl font-black tracking-[0.03em] text-black sm:text-5xl lg:text-[3.75rem]">
+      <h2
+        className={`text-center text-4xl font-black tracking-[0.03em] text-black sm:text-5xl lg:text-[3.75rem] ${titleClassName ?? ""}`}
+        style={titleStyle}
+      >
         {title}
       </h2>
 
       <div
         ref={containerRef}
-        className="mt-10 flex justify-center overflow-visible px-3 pt-3 pb-10"
+        className={`mt-10 flex justify-center overflow-visible px-3 pt-3 pb-10 ${containerClassName ?? ""}`}
       >
         <p
           ref={textRef}
-          className="m-0 inline-block select-none whitespace-nowrap bg-clip-text text-center text-transparent"
+          className={`m-0 inline-block select-none whitespace-nowrap bg-clip-text text-center text-transparent ${valueClassName ?? ""}`}
           style={{
             backgroundImage: TEXT_GRADIENT,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            fontFamily: '"Arial Black", "Helvetica Neue", Arial, sans-serif',
+            fontFamily:
+              '"Urbane", "Arial Black", "Helvetica Neue", Arial, sans-serif',
             fontSize: `${fontSize}px`,
             fontWeight: 900,
             fontStyle: "normal",
@@ -112,6 +132,7 @@ export function TotalScreens({
             paddingRight: "0.06em",
             paddingBottom: "0.1em",
             paddingLeft: "0.08em",
+            ...valueStyle,
           }}
           aria-label={`${title} ${formattedValue}`}
         >

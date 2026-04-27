@@ -35,6 +35,10 @@ export interface RingChartProps {
   animationDuration?: number;
   /** Extra wrapper className */
   className?: string;
+  /** Optional class for the center percentage */
+  centerValueClassName?: string;
+  /** Optional class for the center label */
+  centerLabelClassName?: string;
 }
 
 /* ------------------------------------------------------------------ */
@@ -127,6 +131,8 @@ export function RingChart({
   gap = 6,
   animationDuration = 1200,
   className,
+  centerValueClassName,
+  centerLabelClassName,
 }: RingChartProps) {
   const center = size / 2;
   const maxOuter = center - 4; // small padding from SVG edge
@@ -276,13 +282,17 @@ export function RingChart({
 
         {/* ---- Center label ---- */}
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-          <span className="text-6xl font-bold text-zinc-800">
+          <span
+            className={`text-6xl font-bold text-zinc-800 ${centerValueClassName ?? ""}`}
+          >
             {Math.round(
               data[0]?.target > 0 ? (data[0].value / data[0].target) * 100 : 0,
             )}
             %
           </span>
-          <span className="text-[7px] font-semibold tracking-widest text-zinc-400 uppercase mt-0.5">
+          <span
+            className={`mt-0.5 text-[7px] font-semibold uppercase tracking-widest text-zinc-400 ${centerLabelClassName ?? ""}`}
+          >
             {data[0]?.label}
           </span>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useId } from "react";
+import { useId, type CSSProperties } from "react";
 import { Bar, BarChart, CartesianGrid, Cell, XAxis, YAxis } from "recharts";
 
 export interface AffinityBarDatum {
@@ -15,16 +15,41 @@ export interface AffinityBarChartProps {
   maxValue?: number;
   ticks?: number[];
   className?: string;
+  chartWidth?: number;
+  chartHeight?: number;
+  titleClassName?: string;
+  titleStyle?: CSSProperties;
+  containerMaxWidthClassName?: string;
+  chartContainerClassName?: string;
+  barSize?: number;
+  xTickFontSize?: number;
+  xTickDy?: number;
+  yTickFontSize?: number;
+  xTickColor?: string;
+  yTickColor?: string;
+  labelRotation?: number;
+  xAxisHeight?: number;
+  margin?: {
+    top: number;
+    right: number;
+    bottom: number;
+    left: number;
+  };
+  barCategoryGap?: string | number;
 }
 
 const DEFAULT_TICKS = [0, 1, 1.25, 1.5, 1.75, 2];
 
 interface AffinityXAxisTickProps {
-  x?: number;
-  y?: number;
+  x?: number | string;
+  y?: number | string;
   payload?: {
     value?: string | number;
   };
+  fontSize?: number;
+  dy?: number;
+  rotation?: number;
+  color?: string;
 }
 
 function formatTick(value: number): string {
@@ -33,16 +58,27 @@ function formatTick(value: number): string {
     : value.toFixed(2).replace(/0+$/, "").replace(/\.$/, "");
 }
 
-function AffinityXAxisTick({ x = 0, y = 0, payload }: AffinityXAxisTickProps) {
+function AffinityXAxisTick({
+  x = 0,
+  y = 0,
+  payload,
+  fontSize = 13.5,
+  dy = 22,
+  rotation = -27,
+  color = "#B8B8B8",
+}: AffinityXAxisTickProps) {
+  const translateX = typeof x === "number" ? x : Number(x ?? 0);
+  const translateY = typeof y === "number" ? y : Number(y ?? 0);
+
   return (
-    <g transform={`translate(${x}, ${y})`}>
+    <g transform={`translate(${translateX}, ${translateY})`}>
       <text
-        dy={22}
-        fill="#B8B8B8"
-        fontSize={13.5}
+        dy={dy}
+        fill={color}
+        fontSize={fontSize}
         fontWeight={400}
         textAnchor="end"
-        transform="rotate(-27)"
+        transform={`rotate(${rotation})`}
       >
         {payload?.value}
       </text>
@@ -56,31 +92,54 @@ export function AffinityBarChart({
   maxValue = 2,
   ticks = DEFAULT_TICKS,
   className,
+  chartWidth = 1240,
+  chartHeight = 560,
+  titleClassName,
+  titleStyle,
+  containerMaxWidthClassName,
+  chartContainerClassName,
+  barSize = 60,
+  xTickFontSize = 13.5,
+  xTickDy = 22,
+  yTickFontSize = 19,
+  xTickColor = "#B8B8B8",
+  yTickColor = "#B7B7B7",
+  labelRotation = -27,
+  xAxisHeight = 118,
+  margin,
+  barCategoryGap,
 }: AffinityBarChartProps) {
   const gradientSeed = useId().replace(/:/g, "");
-  const chartWidth = 1240;
-  const chartHeight = 560;
+  const chartData = data.map((datum, index) => ({
+    ...datum,
+    gradientId: `${gradientSeed}-affinity-${index}`,
+  }));
+  const resolvedMargin = margin ?? {
+    top: 28,
+    right: 16,
+    bottom: 154,
+    left: 28,
+  };
 
   if (!data.length) {
     return null;
   }
 
-  const chartData = data.map((datum, index) => ({
-    ...datum,
-    value: Math.max(0, Math.min(datum.value, maxValue)),
-    gradientId: `${gradientSeed}-affinity-bar-gradient-${index}`,
-  }));
-
   return (
     <section className={`w-full ${className ?? ""}`}>
-      <h2 className="text-center text-3xl font-black tracking-[0.08em] text-black sm:text-4xl">
+      <h2
+        className={`text-center text-3xl font-black tracking-[0.08em] text-black sm:text-4xl ${titleClassName ?? ""}`}
+        style={titleStyle}
+      >
         {title}
       </h2>
 
-      <div className="mx-auto mt-8 w-full overflow-x-auto">
+      <div
+        className={`mx-auto mt-8 w-full overflow-x-auto ${chartContainerClassName ?? ""}`}
+      >
         <div
-          className="mx-auto h-140"
-          style={{ width: chartWidth }}
+          className={`mx-auto h-140 ${containerMaxWidthClassName ?? ""}`}
+          style={{ width: chartWidth, height: chartHeight }}
           role="img"
           aria-label="Affinity index bar chart"
         >
@@ -88,7 +147,8 @@ export function AffinityBarChart({
             width={chartWidth}
             height={chartHeight}
             data={chartData}
-            margin={{ top: 28, right: 16, bottom: 154, left: 28 }}
+            margin={resolvedMargin}
+            barCategoryGap={barCategoryGap}
           >
             <defs>
               {chartData.map((datum) => (
@@ -122,9 +182,17 @@ export function AffinityBarChart({
               axisLine={false}
               tickLine={false}
               interval={0}
-              height={118}
+              height={xAxisHeight}
               padding={{ left: 26, right: 14 }}
-              tick={<AffinityXAxisTick />}
+              tick={(tickProps: AffinityXAxisTickProps) => (
+                <AffinityXAxisTick
+                  {...tickProps}
+                  fontSize={xTickFontSize}
+                  dy={xTickDy}
+                  rotation={labelRotation}
+                  color={xTickColor}
+                />
+              )}
             />
 
             <YAxis
@@ -135,12 +203,16 @@ export function AffinityBarChart({
               domain={[0, maxValue]}
               tickFormatter={formatTick}
               width={54}
-              tick={{ fill: "#B7B7B7", fontSize: 19, fontWeight: 400 }}
+              tick={{
+                fill: yTickColor,
+                fontSize: yTickFontSize,
+                fontWeight: 400,
+              }}
             />
 
             <Bar
               dataKey="value"
-              barSize={60}
+              barSize={barSize}
               radius={[8, 8, 0, 0]}
               isAnimationActive={false}
             >
