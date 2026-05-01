@@ -29,7 +29,7 @@ function ReportCard({
 }) {
   return (
     <section
-      className={`rounded-[22px] border border-[#ECECE8] bg-[#F8F8F6] px-5 py-4 shadow-[0_1px_2px_rgba(15,23,42,0.03)] xl:px-6 xl:py-5 ${className ?? ""}`}
+      className={`rounded-[22px] border border-[#ECECE8] bg-[#F7F7F5] px-5 py-4 shadow-[0_1px_2px_rgba(15,23,42,0.03)] xl:px-6 xl:py-5 ${className ?? ""}`}
     >
       {children}
     </section>
@@ -107,6 +107,79 @@ function MetricReportCard({
 
         <div className="mt-auto flex justify-center">
           <RingChart data={ringData} size={260} ringWidth={44} gap={7} />
+        </div>
+      </div>
+    </ReportCard>
+  );
+}
+
+type CampaignPerformanceRow = {
+  date: string;
+  achievedImpressions: string;
+  achievedRepetitions: string;
+  plannedRepetitions: string;
+  performance: string;
+};
+
+function CampaignPerformanceTableCard({
+  rows,
+}: {
+  rows: CampaignPerformanceRow[];
+}) {
+  const columns = [
+    { key: "date", label: "DATE", widthClass: "w-[18%]" },
+    {
+      key: "achievedImpressions",
+      label: "ACHIEVED IMPRESSIONS",
+      widthClass: "w-[23%]",
+    },
+    {
+      key: "achievedRepetitions",
+      label: "ACHIEVED REPETITIONS",
+      widthClass: "w-[23%]",
+    },
+    {
+      key: "plannedRepetitions",
+      label: "PLANNED REPETITIONS",
+      widthClass: "w-[23%]",
+    },
+    { key: "performance", label: "PERFORMANCE", widthClass: "w-[13%]" },
+  ] as const;
+
+  return (
+    <ReportCard className="w-full rounded-none border-0 bg-white shadow-none px-0! py-0! xl:px-0! xl:py-0!">
+      <div className="space-y-2.5">
+        <div className="rounded-[14px] bg-[#F7F7F5] px-2 py-3 text-center md:px-3">
+          <h2 className="text-[2.1rem] font-semibold uppercase tracking-[-0.02em] text-black">
+            Campaign Performance In Details
+          </h2>
+        </div>
+
+        <div className="rounded-xl bg-[#F7F7F5] px-2 py-3 md:px-3">
+          <div className="flex items-center text-[1.38rem] font-semibold uppercase text-black">
+            {columns.map((column) => (
+              <div key={column.key} className={column.widthClass}>
+                {column.label}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-1.5">
+          {rows.map((row) => (
+            <div
+              key={row.date}
+              className="rounded-xl bg-[#F7F7F5] px-2 py-3 text-[1.32rem] font-light text-[#232323] md:px-3"
+            >
+              <div className="flex items-center">
+                <div className="w-[18%]">{row.date}</div>
+                <div className="w-[23%]">{row.achievedImpressions}</div>
+                <div className="w-[23%]">{row.achievedRepetitions}</div>
+                <div className="w-[23%]">{row.plannedRepetitions}</div>
+                <div className="w-[13%]">{row.performance}</div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </ReportCard>
@@ -243,11 +316,217 @@ const adPlaysByArea: MiniHorizontalBarDatum[] = [
   { label: "One Central", value: 2_000_000 },
 ];
 
+const campaignPerformanceRows: CampaignPerformanceRow[] = [
+  {
+    date: "2025/01/31",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/30",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/29",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/28",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/27",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/26",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/25",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/24",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/23",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/22",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/21",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/20",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/19",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/18",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/17",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/16",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/15",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/14",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/13",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/10",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/09",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/08",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/07",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/06",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/05",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/04",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/03",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/02",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+  {
+    date: "2025/01/01",
+    achievedImpressions: "572,000",
+    achievedRepetitions: "454,000",
+    plannedRepetitions: "360,000",
+    performance: "100%",
+  },
+];
+
 export default function ReportOnePage() {
   return (
     <main className="report-print-stack font-urbane min-h-screen bg-white px-6 py-8 text-black">
       <ReportPage breakAfter className="space-y-4">
-        <header className="mx-auto w-373 max-w-full rounded-[22px] border border-[#ECECE8] bg-[#F8F8F6] px-10 py-5 shadow-[0_1px_2px_rgba(15,23,42,0.03)]">
+        <header className="mx-auto w-373 max-w-full rounded-[22px] border border-[#ECECE8] bg-[#F7F7F5] px-5 py-4 shadow-[0_1px_2px_rgba(15,23,42,0.03)] xl:px-6 xl:py-5">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-[2.05rem] font-semibold uppercase tracking-[-0.02em] text-black">
@@ -265,16 +544,17 @@ export default function ReportOnePage() {
         </header>
 
         <div className="mx-auto grid w-373 max-w-full grid-cols-[0.98fr_1.02fr] grid-rows-[300px_510px] gap-4">
-          <ReportCard className="px-6 py-6">
+          <ReportCard className="flex h-full items-center justify-center px-6 py-6">
             <TotalScreens
               value={totalScreens}
+              className="w-full"
               titleStyle={{ fontSize: "1.08rem" }}
               titleClassName="font-semibold tracking-[0.08em]"
               valueStyle={{ fontWeight: 600, letterSpacing: "-0.04em" }}
               maxFontSize={205}
               minFontSize={92}
               horizontalPadding={12}
-              containerClassName="!mt-4 !px-0 !pt-0 !pb-1"
+              containerClassName="!mt-0 !px-0 !pt-0 !pb-1"
             />
           </ReportCard>
 
@@ -363,6 +643,12 @@ export default function ReportOnePage() {
               yTickFontSize={10.5}
             />
           </ReportCard>
+        </div>
+      </ReportPage>
+
+      <ReportPage>
+        <div className="mx-auto w-373 max-w-full">
+          <CampaignPerformanceTableCard rows={campaignPerformanceRows} />
         </div>
       </ReportPage>
     </main>
