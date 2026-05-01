@@ -281,9 +281,9 @@ export function RingChart({
         </svg>
 
         {/* ---- Center label ---- */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none font-urbane">
           <span
-            className={`text-6xl font-bold text-zinc-800 ${centerValueClassName ?? ""}`}
+            className={`pb-1.25 text-[3.218rem] font-semibold leading-none text-zinc-800 ${centerValueClassName ?? ""}`}
           >
             {Math.round(
               data[0]?.target > 0 ? (data[0].value / data[0].target) * 100 : 0,
@@ -291,7 +291,7 @@ export function RingChart({
             %
           </span>
           <span
-            className={`mt-0.5 text-[7px] font-semibold uppercase tracking-widest text-zinc-400 ${centerLabelClassName ?? ""}`}
+            className={`text-[7px] font-semibold leading-none uppercase tracking-widest text-zinc-400 ${centerLabelClassName ?? ""}`}
           >
             {data[0]?.label}
           </span>

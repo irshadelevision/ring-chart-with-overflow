@@ -106,10 +106,6 @@ body {
   max-width: 1440px;
   margin-inline: auto;
   min-height: 760px;
-  border-radius: 30px;
-  background: #ffffff;
-  padding: 0.35rem;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
 }
 
 @media print {

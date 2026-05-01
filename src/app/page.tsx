@@ -11,7 +11,7 @@ import {
   type UniqueReachDatum,
 } from "@/components/unique-reach-chart";
 
-const progressValue = 120;
+const progressValue = 75;
 
 const healthRings: RingDatum[] = [
   {
@@ -107,7 +107,7 @@ const uniqueReachByArea: UniqueReachDatum[] = [
   { label: "JLT Comm", value: 2_040_000 },
   { label: "JLT Res", value: 1_590_000 },
   { label: "JVC", value: 2_570_000 },
-  { label: "The Greens And Views", value: 2_790_000 },
+  { label: "The Greens & Views", value: 2_790_000 },
   { label: "The Palm", value: 1_990_000 },
   { label: "One Central", value: 1_930_000 },
 ];

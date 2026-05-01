@@ -78,7 +78,8 @@ function MetricReportCard({
       label: "Percentage of Target",
       value: gaugeValue,
       target: 100,
-      color: ["#111D8F", "#2C68CF", "#82E9EE"],
+      color: ["#00F2F2", "#047EBE", "#08088A"],
+      unit: "%",
     },
   ];
 
@@ -98,21 +99,14 @@ function MetricReportCard({
         <MiniHorizontalBarChart
           data={barData}
           chartWidth={432}
-          labelWidth={116}
+          labelWidth={132}
           chartHeight={500}
           barSize={9}
           ariaLabel={`${title} bar chart by area`}
         />
 
         <div className="mt-auto flex justify-center">
-          <RingChart
-            data={ringData}
-            size={248}
-            ringWidth={38}
-            gap={10}
-            centerValueClassName="font-semibold tracking-[-0.035em]"
-            centerLabelClassName="font-semibold tracking-[0.24em]"
-          />
+          <RingChart data={ringData} size={260} ringWidth={44} gap={7} />
         </div>
       </div>
     </ReportCard>
@@ -202,7 +196,7 @@ const reachByArea: UniqueReachDatum[] = [
   { label: "JLT Comm", value: 2_040_000 },
   { label: "JLT Res", value: 1_590_000 },
   { label: "JVC", value: 2_570_000 },
-  { label: "The Greens And Views", value: 2_790_000 },
+  { label: "The Greens & Views", value: 2_790_000 },
   { label: "The Palm", value: 1_990_000 },
   { label: "One Central", value: 1_930_000 },
 ];
@@ -223,7 +217,7 @@ const impressionsByArea: MiniHorizontalBarDatum[] = [
   { label: "JLT Comm", value: 2_080_000 },
   { label: "JLT Res", value: 1_610_000 },
   { label: "JVC", value: 2_580_000 },
-  { label: "The Greens And Views", value: 2_790_000 },
+  { label: "The Greens & Views", value: 2_790_000 },
   { label: "The Palm", value: 2_020_000 },
   { label: "One Central", value: 1_960_000 },
 ];
@@ -244,14 +238,14 @@ const adPlaysByArea: MiniHorizontalBarDatum[] = [
   { label: "JLT Comm", value: 2_120_000 },
   { label: "JLT Res", value: 1_650_000 },
   { label: "JVC", value: 2_610_000 },
-  { label: "The Greens And Views", value: 2_810_000 },
+  { label: "The Greens & Views", value: 2_810_000 },
   { label: "The Palm", value: 2_060_000 },
   { label: "One Central", value: 2_000_000 },
 ];
 
 export default function ReportOnePage() {
   return (
-    <main className="report-print-stack font-urbane min-h-screen bg-[#F1F1ED] px-6 py-8 text-black">
+    <main className="report-print-stack font-urbane min-h-screen bg-white px-6 py-8 text-black">
       <ReportPage breakAfter className="space-y-4">
         <header className="rounded-[22px] border border-[#ECECE8] bg-[#F8F8F6] px-10 py-5 shadow-[0_1px_2px_rgba(15,23,42,0.03)]">
           <div className="flex items-start justify-between gap-4">

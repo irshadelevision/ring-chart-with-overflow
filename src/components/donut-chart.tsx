@@ -18,6 +18,7 @@ const PERCENT_COLOR = "#102B79";
 const LABEL_COLOR = "#B6BAC6";
 const TRANSPARENT = "rgba(255, 255, 255, 0)";
 const FALLBACK_FONT = "Arial, Helvetica, sans-serif";
+const SEGMENT_BORDER_RADIUS = 4.5;
 
 export interface DonutDatum {
   label: string;
@@ -82,7 +83,7 @@ export function DonutChart({
           borderAlign: "inner" as const,
           borderColor: TRANSPARENT,
           borderWidth: 0,
-          borderRadius: 9,
+          borderRadius: SEGMENT_BORDER_RADIUS,
           spacing: segmentSpacing,
           hoverOffset: 0,
           hoverBorderColor: TRANSPARENT,
