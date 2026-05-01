@@ -99,9 +99,9 @@ export function AffinityBarChart({
   containerMaxWidthClassName,
   chartContainerClassName,
   barSize = 60,
-  xTickFontSize = 13.5,
+  xTickFontSize = 14.175,
   xTickDy = 22,
-  yTickFontSize = 19,
+  yTickFontSize = 19.95,
   xTickColor = "#B8B8B8",
   yTickColor = "#B7B7B7",
   labelRotation = -27,
@@ -135,7 +135,7 @@ export function AffinityBarChart({
       </h2>
 
       <div
-        className={`mx-auto mt-8 w-full overflow-x-auto ${chartContainerClassName ?? ""}`}
+        className={`mx-auto mt-12 w-full overflow-x-auto ${chartContainerClassName ?? ""}`}
       >
         <div
           className={`mx-auto h-140 ${containerMaxWidthClassName ?? ""}`}

@@ -314,11 +314,11 @@ export default function ReportOnePage() {
               titleStyle={{ fontSize: "1.08rem" }}
               titleClassName="font-semibold tracking-[0.08em]"
               containerMaxWidthClassName="max-w-none"
-              chartContainerClassName="mt-3"
+              chartContainerClassName="mt-5.5"
               barSize={31}
-              xTickFontSize={7.6}
-              xTickDy={34}
-              yTickFontSize={11.2}
+              xTickFontSize={7.98}
+              xTickDy={17}
+              yTickFontSize={11.76}
               labelRotation={-23}
               xAxisHeight={82}
               margin={{ top: 8, right: 8, bottom: 30, left: 14 }}
