@@ -127,7 +127,7 @@ function CampaignPerformanceTableCard({
   rows: CampaignPerformanceRow[];
 }) {
   const columns = [
-    { key: "date", label: "DATE", widthClass: "w-[18%]" },
+    { key: "date", label: "DATE", widthClass: "w-[18%] pl-5" },
     {
       key: "achievedImpressions",
       label: "ACHIEVED IMPRESSIONS",
@@ -172,7 +172,7 @@ function CampaignPerformanceTableCard({
               className="rounded-xl bg-[#F7F7F5] px-2 py-3 text-[1.32rem] font-light text-[#232323] md:px-3"
             >
               <div className="flex items-center">
-                <div className="w-[18%]">{row.date}</div>
+                <div className="w-[18%] pl-5">{row.date}</div>
                 <div className="w-[23%]">{row.achievedImpressions}</div>
                 <div className="w-[23%]">{row.achievedRepetitions}</div>
                 <div className="w-[23%]">{row.plannedRepetitions}</div>
