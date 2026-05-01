@@ -247,7 +247,7 @@ export default function ReportOnePage() {
   return (
     <main className="report-print-stack font-urbane min-h-screen bg-white px-6 py-8 text-black">
       <ReportPage breakAfter className="space-y-4">
-        <header className="rounded-[22px] border border-[#ECECE8] bg-[#F8F8F6] px-10 py-5 shadow-[0_1px_2px_rgba(15,23,42,0.03)]">
+        <header className="mx-auto w-373 max-w-full rounded-[22px] border border-[#ECECE8] bg-[#F8F8F6] px-10 py-5 shadow-[0_1px_2px_rgba(15,23,42,0.03)]">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-[2.05rem] font-semibold uppercase tracking-[-0.02em] text-black">
@@ -264,7 +264,7 @@ export default function ReportOnePage() {
           </div>
         </header>
 
-        <div className="grid grid-cols-[1.04fr_0.96fr] grid-rows-[300px_510px] gap-4">
+        <div className="mx-auto grid w-373 max-w-full grid-cols-[0.98fr_1.02fr] grid-rows-[300px_510px] gap-4">
           <ReportCard className="px-6 py-6">
             <TotalScreens
               value={totalScreens}
@@ -309,7 +309,7 @@ export default function ReportOnePage() {
           <ReportCard className="px-6 py-6">
             <AffinityBarChart
               data={affinityIndex}
-              chartWidth={690}
+              chartWidth={790}
               chartHeight={446}
               titleStyle={{ fontSize: "1.08rem" }}
               titleClassName="font-semibold tracking-[0.08em]"
@@ -328,7 +328,7 @@ export default function ReportOnePage() {
       </ReportPage>
 
       <ReportPage>
-        <div className="grid grid-cols-[1fr_1fr_0.98fr] gap-4">
+        <div className="mx-auto grid w-373 max-w-full grid-cols-[1fr_1fr_0.98fr] gap-4">
           <MetricReportCard
             title="Total Impressions"
             value={totalImpressions}
