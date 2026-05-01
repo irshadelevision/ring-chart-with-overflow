@@ -108,7 +108,21 @@ body {
   min-height: 760px;
 }
 
+@page {
+  /* Honour the user's paper choice (A4, A3, Letter, etc.) */
+  size: auto;
+  margin: 1cm;
+}
+
 @media print {
+  /* Scale the whole 1440px design to fit landscape A4 (277mm printable ≈ 1047px).
+     At 72% the design renders as 1037px — snug but clear on A4 landscape.
+     On larger paper (A3) it will be surrounded by whitespace.
+     Users can override via the browser's print scale slider for other sizes. */
+  html {
+    zoom: 72%;
+  }
+
   body {
     background: #ffffff;
     color: #171717;
@@ -127,6 +141,7 @@ body {
     padding: 0;
     border-radius: 0;
     box-shadow: none;
+    overflow: hidden;
     break-inside: avoid-page;
     page-break-inside: avoid;
   }
@@ -134,5 +149,14 @@ body {
   .report-sheet-break {
     break-after: page;
     page-break-after: always;
+  }
+
+  /* Gradient clip text is invisible in most print engines — use solid navy instead */
+  .total-screens-value {
+    background-image: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: #1e439e !important;
+    color: #1e439e !important;
   }
 }

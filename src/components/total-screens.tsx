@@ -116,7 +116,7 @@ export function TotalScreens({
       >
         <p
           ref={textRef}
-          className={`m-0 inline-block select-none whitespace-nowrap bg-clip-text text-center text-transparent ${valueClassName ?? ""}`}
+          className={`total-screens-value m-0 inline-block select-none whitespace-nowrap bg-clip-text text-center text-transparent ${valueClassName ?? ""}`}
           style={{
             backgroundImage: TEXT_GRADIENT,
             WebkitBackgroundClip: "text",
