@@ -84,7 +84,7 @@ function MetricReportCard({
   ];
 
   return (
-    <ReportCard className="flex min-h-190 flex-col px-6 py-7">
+    <ReportCard className="flex min-h-190 flex-col border-0 px-6 py-7">
       <h2 className="text-center text-[1.08rem] font-semibold uppercase tracking-[0.08em] text-black">
         {title}
       </h2>
@@ -526,7 +526,7 @@ export default function ReportOnePage() {
   return (
     <main className="report-print-stack font-urbane min-h-screen bg-white px-6 py-8 text-black">
       <ReportPage breakAfter className="space-y-4">
-        <header className="mx-auto w-373 max-w-full rounded-[22px] border border-[#ECECE8] bg-[#F7F7F5] px-5 py-4 shadow-[0_1px_2px_rgba(15,23,42,0.03)] xl:px-6 xl:py-5">
+        <header className="mx-auto w-373 max-w-full rounded-[22px] border-0 bg-[#F7F7F5] px-5 py-4 shadow-[0_1px_2px_rgba(15,23,42,0.03)] xl:px-6 xl:py-5">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-[2.05rem] font-semibold uppercase tracking-[-0.02em] text-black">
@@ -544,7 +544,7 @@ export default function ReportOnePage() {
         </header>
 
         <div className="mx-auto grid w-373 max-w-full grid-cols-[0.98fr_1.02fr] grid-rows-[300px_510px] gap-4">
-          <ReportCard className="flex h-full items-center justify-center px-6 py-6">
+          <ReportCard className="flex h-full items-center justify-center border-0 px-6 py-6">
             <TotalScreens
               value={totalScreens}
               className="w-full"
@@ -558,7 +558,7 @@ export default function ReportOnePage() {
             />
           </ReportCard>
 
-          <ReportCard className="row-span-2 flex flex-col px-6 py-6">
+          <ReportCard className="row-span-2 flex flex-col border-0 px-6 py-6">
             <h2 className="text-center text-[1.1rem] font-semibold uppercase tracking-[0.08em] text-black">
               Demographics
             </h2>
@@ -586,7 +586,7 @@ export default function ReportOnePage() {
             </div>
           </ReportCard>
 
-          <ReportCard className="px-6 py-6">
+          <ReportCard className="border-0 px-6 py-6">
             <AffinityBarChart
               data={affinityIndex}
               chartWidth={790}
@@ -623,7 +623,7 @@ export default function ReportOnePage() {
             gaugeValue={125}
           />
 
-          <ReportCard className="min-h-190 px-6 py-7">
+          <ReportCard className="min-h-190 border-0 px-6 py-7">
             <UniqueReachChart
               value={uniqueReach}
               data={reachByArea}
