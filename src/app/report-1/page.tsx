@@ -29,7 +29,7 @@ function ReportCard({
 }) {
   return (
     <section
-      className={`rounded-[22px] border border-[#ECECE8] bg-[#F7F7F5] px-5 py-4 shadow-[0_1px_2px_rgba(15,23,42,0.03)] xl:px-6 xl:py-5 ${className ?? ""}`}
+      className={`rounded-[22px] border border-[#ECECE8] bg-[rgb(246,246,246)] px-5 py-4 shadow-[0_1px_2px_rgba(15,23,42,0.03)] xl:px-6 xl:py-5 ${className ?? ""}`}
     >
       {children}
     </section>
@@ -149,13 +149,13 @@ function CampaignPerformanceTableCard({
   return (
     <ReportCard className="w-full rounded-none border-0 bg-white shadow-none px-0! py-0! xl:px-0! xl:py-0!">
       <div className="space-y-2.5">
-        <div className="rounded-[14px] bg-[#F7F7F5] px-2 py-3 text-center md:px-3">
+        <div className="rounded-[14px] bg-[rgb(246,246,246)] px-2 py-3 text-center md:px-3">
           <h2 className="text-[2.1rem] font-semibold uppercase tracking-[-0.02em] text-black">
             Campaign Performance In Details
           </h2>
         </div>
 
-        <div className="rounded-xl bg-[#F7F7F5] px-2 py-3 md:px-3">
+        <div className="rounded-xl bg-[rgb(246,246,246)] px-2 py-3 md:px-3">
           <div className="flex items-center text-[1.38rem] font-semibold uppercase text-black">
             {columns.map((column) => (
               <div key={column.key} className={column.widthClass}>
@@ -169,7 +169,7 @@ function CampaignPerformanceTableCard({
           {rows.map((row) => (
             <div
               key={row.date}
-              className="rounded-xl bg-[#F7F7F5] px-2 py-3 text-[1.32rem] font-light text-[#232323] md:px-3"
+              className="rounded-xl bg-[rgb(246,246,246)] px-2 py-3 text-[1.32rem] font-light text-[#232323] md:px-3"
             >
               <div className="flex items-center">
                 <div className="w-[18%] pl-5">{row.date}</div>
@@ -526,7 +526,7 @@ export default function ReportOnePage() {
   return (
     <main className="report-print-stack font-urbane min-h-screen bg-white px-6 py-8 text-black">
       <ReportPage breakAfter className="space-y-4">
-        <header className="mx-auto w-373 max-w-full rounded-[22px] border-0 bg-[#F7F7F5] px-5 py-4 shadow-[0_1px_2px_rgba(15,23,42,0.03)] xl:px-6 xl:py-5">
+        <header className="mx-auto w-373 max-w-full rounded-[22px] border-0 bg-[rgb(246,246,246)] px-5 py-4 shadow-[0_1px_2px_rgba(15,23,42,0.03)] xl:px-6 xl:py-5">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-[2.05rem] font-semibold uppercase tracking-[-0.02em] text-black">
